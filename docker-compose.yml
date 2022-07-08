@@ -1,0 +1,32 @@
+version: "3.0"
+services:
+  database:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "database:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_DB: "pgblog"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "pgblog"
+    networks:
+      - "pgblog"
+  app:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      DATABASE_URL: "postgresql://root:pgblog@database:5432/pgblog?schema=public"
+    command: "npm run dev"
+    volumes:
+      - ".:/app"
+    networks:
+      - "pgblog"
+
+networks:
+  pgblog:
+
+volumes:
+  database:

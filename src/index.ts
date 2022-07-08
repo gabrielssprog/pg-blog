@@ -1,5 +1,9 @@
+import { PrismaClient } from "@prisma/client"
 import { App } from "./App"
 
-const app = App.newApp()
+const PORT = process.env.PORT || 3001
 
-app.listen(3001, () => console.log('server running'))
+const connection = new PrismaClient()
+const app = App.newApp(connection)
+
+app.listen(PORT, () => console.log('server running'))

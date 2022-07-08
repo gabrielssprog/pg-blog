@@ -1,8 +1,9 @@
+import { PrismaClient } from "@prisma/client";
 import { Router } from "express";
 import { SignInViewController } from "./controllers/SignInViewController/SignInViewController";
 
 export class UserRoutes {
-    public static newUserRoutes() {
+    public static newUserRoutes(connection: PrismaClient) {
         const userRoute = Router()
 
         const signInViewController = new SignInViewController()
