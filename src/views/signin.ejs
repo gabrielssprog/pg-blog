@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PG Blog | sign in</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="min-vh-100 d-flex flex-column justify-content-center align-items-center">
+        <div>
+            <h3>Faça login e comece a escrever!</h3>
+        </div>
+        <div>
+            <div id="g_id_onload"  data-callback="signin" data-client_id="656652188818-neg9ptfhhpc176vt4edrnd8jvvl4e3lt.apps.googleusercontent.com">
+            </div>
+            <div class="g_id_signin" data-type="standard"></div>
+        </div>
+    </div>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script>
+      async function signin(response) {
+        const signInResponse = await fetch(`${window.origin}/signin`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            google_token: response.credential
+          })
+        })
+
+        const user = await signInResponse.json()
+        console.log({ user })
+      }
+    </script>
+  </body>
+</html>
