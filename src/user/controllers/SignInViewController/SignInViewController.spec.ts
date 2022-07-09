@@ -1,7 +1,7 @@
 import { SignInViewController } from "./SignInViewController"
 
 describe('Signin view controller', () => {
-    it('should call "render" with correct view', () => {
+    it('should call "render" with signin', () => {
         const signinViewController = new SignInViewController()
         const response: any = {
             render: jest.fn()

@@ -3,6 +3,7 @@ import { Router } from "express";
 import { OAuth2Client } from "google-auth-library";
 import { SignInUserController } from "./controllers/SigInUserController/SignInUserController";
 import { SignInViewController } from "./controllers/SignInViewController/SignInViewController";
+import { UserViewController } from "./controllers/UserViewController/UserViewController";
 import { CreateUserService } from "./services/CreateUserService/CreateUserService";
 import { FindUserService } from "./services/FindUserService/FindUserService";
 import { UserRepository } from "./UserRepository/UserRepository";
@@ -16,6 +17,9 @@ export class UserRoutes {
 
         const signInViewController = new SignInViewController()
         userRoute.get('/pages/users/signin', signInViewController.handle)
+
+        const userViewController = new UserViewController()
+        userRoute.get('/pages/users/:userId', userViewController.handle)
 
         const signInUserController = new SignInUserController(
             createUserService,
