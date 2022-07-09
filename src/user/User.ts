@@ -6,5 +6,4 @@ export interface User {
     picture: string;
 }
 
-export type UserWithoutId = Omit<User, 'id'>
 export type PartialUser = Partial<User>

@@ -1,12 +1,12 @@
 import { PrismaClient } from "@prisma/client"
-import { User, UserWithoutId, PartialUser } from "../User"
+import { User, PartialUser } from "../User"
 
 export class UserRepository {
   constructor(
     private connection: PrismaClient['user']
   ) { }
 
-  public async create(data: UserWithoutId): Promise<User> {
+  public async create(data: Omit<User, 'id'>): Promise<User> {
     return await this.connection.create({
       data
     })

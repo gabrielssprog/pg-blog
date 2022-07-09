@@ -1,4 +1,4 @@
-import { UserWithoutId } from "../../User";
+import { User } from "../../User";
 import { UserRepository } from "../../UserRepository/UserRepository";
 
 export class CreateUserService {
@@ -6,7 +6,7 @@ export class CreateUserService {
     private userRepository: UserRepository
   ) { }
 
-  async execute(user: UserWithoutId) {
+  async execute(user: Omit<User, 'id'>) {
     return await this.userRepository.create(user)
   }
 }
