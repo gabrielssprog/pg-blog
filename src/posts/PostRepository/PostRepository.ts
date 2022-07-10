@@ -13,8 +13,14 @@ export class PostRepository {
   }
 
   public async findOne(post: PartialPost): Promise<Post | null> {
-    return this.connection.findFirst({
+    return await this.connection.findFirst({
         where: post
+    })
+  }
+
+  public async findAll(post?: Partial<Post>): Promise<Post[]> {
+    return await this.connection.findMany({
+      where: post
     })
   }
 }

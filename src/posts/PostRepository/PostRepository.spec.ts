@@ -10,20 +10,27 @@ describe('Post Repository', () => {
     }
     const connection: any = {
         create: () => post,
-        findFirst: () => post
+        findFirst: () => post,
+        findMany: () => [post]
     }
+    const postRepository = new PostRepository(connection)
 
     it('should return created post', async () => {
-        const postRepository = new PostRepository(connection)
         const postCreated = await postRepository.create(post)
 
         expect(postCreated).toStrictEqual(post)
     })
 
     it('should return post', async () => {
-        const bookRepository = new PostRepository(connection)
-        const postFound = await bookRepository.findOne(post)
+        const postRepository = new PostRepository(connection)
+        const postFound = await postRepository.findOne(post)
 
         expect(postFound).toStrictEqual(post)
+    })
+
+    it('should return all posts', async () => {
+        const postsFound = await postRepository.findAll(post)
+
+        expect(postsFound).toStrictEqual([post])
     })
 })
