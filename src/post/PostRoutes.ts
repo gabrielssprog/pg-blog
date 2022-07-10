@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Router } from "express";
 import { CreatePostController } from "./controllers/CreatePostController/CreatePostController";
+import { CreatePostViewController } from "./controllers/CreatePostViewController/CreatePostViewController";
 import { FindPostByIdController } from "./controllers/FindPostByIdController/FindPostByIdController";
 import { ListPostsByAuthorController } from "./controllers/ListPostsByAuthorController/ListPostsByAuthorController";
 import { ListPostsController } from "./controllers/ListPostsController/ListPostsController";
@@ -22,8 +23,11 @@ export class PostRoutes {
         const postsViewController = new PostsViewController()
         postRoutes.get('/pages/posts', postsViewController.handler)
 
+        const createPostViewController = new CreatePostViewController()
+        postRoutes.get('/pages/post/new', createPostViewController.handler)
+
         const postViewController = new PostViewController()
-        postRoutes.get('/pages/posts/:postId', postViewController.handler)
+        postRoutes.get('/pages/post/:postId', postViewController.handler)
 
         const createPostController = new CreatePostController(
             createPostService
