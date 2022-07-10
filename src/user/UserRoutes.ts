@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Router } from "express";
 import { OAuth2Client } from "google-auth-library";
+import { MyProfileViewController } from "./controllers/MyProfileViewController/MyProfileViewController";
 import { SignInUserController } from "./controllers/SigInUserController/SignInUserController";
 import { SignInViewController } from "./controllers/SignInViewController/SignInViewController";
 import { UserViewController } from "./controllers/UserViewController/UserViewController";
@@ -20,6 +21,9 @@ export class UserRoutes {
 
         const userViewController = new UserViewController()
         userRoute.get('/pages/user/:userId', userViewController.handler)
+
+        const myProfileViewController = new MyProfileViewController()
+        userRoute.get('/pages/myprofile', myProfileViewController.handler)
 
         const signInUserController = new SignInUserController(
             createUserService,
