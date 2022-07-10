@@ -6,7 +6,7 @@ describe('Signin view controller', () => {
         const response: any = {
             render: jest.fn()
         }
-        signinViewController.handle(
+        signinViewController.handler(
             {} as any,
             response,
         )

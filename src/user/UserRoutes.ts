@@ -16,10 +16,10 @@ export class UserRoutes {
         const findUserService = new FindUserService(userRepository)
 
         const signInViewController = new SignInViewController()
-        userRoute.get('/pages/users/signin', signInViewController.handle)
+        userRoute.get('/pages/users/signin', signInViewController.handler)
 
         const userViewController = new UserViewController()
-        userRoute.get('/pages/users/:userId', userViewController.handle)
+        userRoute.get('/pages/users/:userId', userViewController.handler)
 
         const signInUserController = new SignInUserController(
             createUserService,

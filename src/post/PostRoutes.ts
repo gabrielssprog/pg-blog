@@ -4,6 +4,7 @@ import { CreatePostController } from "./controllers/CreatePostController/CreateP
 import { ListPostsByAuthorController } from "./controllers/ListPostsByAuthorController/ListPostsByAuthorController";
 import { ListPostsController } from "./controllers/ListPostsController/ListPostsController";
 import { PostsViewController } from "./controllers/PostsViewController/PostsViewController";
+import { PostViewController } from "./controllers/PostViewController/PostsViewController";
 import { PostRepository } from "./PostRepository/PostRepository";
 import { CreatePostService } from "./services/CreatePostService/CreatePostService";
 import { ListPostsService } from "./services/ListPostsService/ListPostsService";
@@ -16,7 +17,10 @@ export class PostRoutes {
         const listPostsService = new ListPostsService(postRepository)
 
         const postsViewController = new PostsViewController()
-        postRoutes.get('/pages/posts', postsViewController.handle)
+        postRoutes.get('/pages/posts', postsViewController.handler)
+
+        const postViewController = new PostViewController()
+        postRoutes.get('/pages/posts/:postId', postViewController.handler)
 
         const createPostController = new CreatePostController(
             createPostService

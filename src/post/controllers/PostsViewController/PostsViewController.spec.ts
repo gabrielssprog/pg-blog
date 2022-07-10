@@ -6,7 +6,7 @@ describe('posts view controller', () => {
         const response: any = {
             render: jest.fn()
         }
-        postsViewController.handle(
+        postsViewController.handler(
             {} as any,
             response,
         )

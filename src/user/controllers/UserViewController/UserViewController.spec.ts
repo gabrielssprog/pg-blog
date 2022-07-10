@@ -6,7 +6,7 @@ describe('user view controller', () => {
         const response: any = {
             render: jest.fn()
         }
-        userViewController.handle(
+        userViewController.handler(
             {} as any,
             response,
         )
