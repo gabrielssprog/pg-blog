@@ -31,3 +31,18 @@ export const renderPostCards = (element, posts) => {
     </div>
     `).join('')
 }
+
+export const createPost = async (postData) => {
+    const response = await fetch(`${window.origin}/posts`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            post: postData
+        })
+    })
+    const { post } = await response.json()
+
+    return post
+}
