@@ -31,9 +31,9 @@
           })
         })
 
-        const user = await signInResponse.json()
-        console.log({ user })
-        console.log('cred', response.credential)
+        const { user } = await signInResponse.json()
+        
+        localStorage.setItem('user', JSON.stringify(user))
       }
     </script>
   </body>

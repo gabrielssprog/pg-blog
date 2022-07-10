@@ -1,6 +1,6 @@
-import { ListPostsController } from "./ListPostsController"
+import { ListPostsByAuthorController } from "./ListPostsByAuthorController"
 
-describe('List Posts Controller', () => {
+describe('List Posts By Author Controller', () => {
     const posts = [{
         id: 1,
         authorId: '12',
@@ -8,6 +8,11 @@ describe('List Posts Controller', () => {
         picture: 'asdf',
         content: '123'
     }]
+    const request: any = {
+        params: {
+            authorId: posts[0].authorId
+        }
+    }
     const response: any = {
         status: () => response,
         json: jest.fn()
@@ -15,14 +20,14 @@ describe('List Posts Controller', () => {
     const next = jest.fn()
 
     it('should list all posts', async () => {
-        const listPostsController = new ListPostsController(
+        const listPostsByAuthorController = new ListPostsByAuthorController(
             {
                 execute: () => posts
             } as any
         )
 
-        await listPostsController.handler(
-            {} as any,
+        await listPostsByAuthorController.handler(
+            request,
             response,
             () => {}
         )
@@ -33,14 +38,14 @@ describe('List Posts Controller', () => {
     })
 
     it('should call "next" with error', async () => {
-        const createPostController = new ListPostsController(
+        const listPostsByAuthorController = new ListPostsByAuthorController(
             {
                 execute: () => { throw new Error()}
             } as any
         )
 
-        await createPostController.handler(
-            {} as any,
+        await listPostsByAuthorController.handler(
+            request,
             {} as any,
             next
         )

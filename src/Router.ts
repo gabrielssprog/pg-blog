@@ -1,6 +1,6 @@
 import { UserRoutes } from "./user/UserRoutes"
 import express from "express"
-import { PostRoutes } from "./posts/PostRoutes"
+import { PostRoutes } from "./post/PostRoutes"
 import { PrismaClient } from "@prisma/client"
 import { OAuth2Client } from "google-auth-library"
 
