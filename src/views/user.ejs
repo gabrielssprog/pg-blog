@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <title>User | </title>
+    <title>Pg Blog | </title>
 </head>
 <body>
     <div>
@@ -18,11 +18,11 @@
                 </div>
             </div>
         </nav>
-        <div class="d-flex align-items-center ps-3 mb-3" style="padding-top: 125px;">
+        <div class="d-flex align-items-center px-3 mb-3 mx-auto" style="padding-top: 100px; max-width: 700px;">
             <img id="picture" height="50" class="rounded me-2" src="" alt="user picture" referrerpolicy="no-referrer">
             <h2 id="name"></h2>
         </div>
-        <div id="posts" class="pt-5">
+        <div id="posts" class="pt-5 px-3 mx-auto" style="max-width: 700px;">
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script type="module">
@@ -39,6 +39,8 @@
             picture.src = user.picture
             const name = document.getElementById('name')
             name.innerHTML = user.name
+            const title = document.getElementsByTagName('title')[0]
+            title.innerHTML += user.name
         })()
     </script>
 </body>

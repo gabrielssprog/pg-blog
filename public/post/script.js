@@ -23,7 +23,7 @@ export const parseContentPost = (content) => content.slice(0, 220).replaceAll('\
 
 export const renderPostCards = (element, posts) => {
     element.innerHTML = posts.map((post) => `
-    <div class="card mb-3 mx-auto" style="max-width: 540px;">
+    <div class="card mb-3 mx-auto">
         <div class="card-body w-100">
             <h5 class="card-title"><a href="${window.origin}/pages/posts/${post.id}">${post.title}<a></h5>
             <p class="card-text">${parseContentPost(post.content)}${post.content.length > 220 && '...'}</p>
