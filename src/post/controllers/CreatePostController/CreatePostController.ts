@@ -8,9 +8,10 @@ export class CreatePostController {
 
     public async handler(request: Request, response: Response, next: NextFunction) {
         try {
-            const post = await this.createPostService.execute(
-                request.body.post
-            )
+            const post = await this.createPostService.execute({
+                ...request.body.post,
+                authorId: request.cookies.user.id
+            })
 
             return response.status(201).json({
                 post

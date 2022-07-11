@@ -1,9 +1,12 @@
 import { CreatePostController } from "./CreatePostController"
 
 describe('Create user controller', () => {
+    const user = {
+        id: '12'
+    }
     const post = {
         id: 1,
-        authorId: '12',
+        authorId: user.id,
         title: 'adsf',
         picture: 'asdf',
         content: '123'
@@ -11,6 +14,9 @@ describe('Create user controller', () => {
     const request: any = {
         body: {
             post
+        },
+        cookies: {
+            user
         }
     }
     const response: any = {

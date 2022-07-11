@@ -18,7 +18,9 @@ services:
       - "3001:3001"
     environment:
       PORT: 3001
+      GOOGLE_CLIENT_ID: "656652188818-neg9ptfhhpc176vt4edrnd8jvvl4e3lt.apps.googleusercontent.com"
       DATABASE_URL: "postgresql://root:pgblog@database:5432/pgblog?schema=public"
+      JWT_SECRET: "9398a232-749f-417d-befc-d236bd286790"
     command: "npm run dev"
     volumes:
       - ".:/app"

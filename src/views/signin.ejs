@@ -31,9 +31,13 @@
           })
         })
 
-        const { user } = await signInResponse.json()
+        const {
+          user,
+          token
+        } = await signInResponse.json()
         
         localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('token', token)
       }
     </script>
   </body>

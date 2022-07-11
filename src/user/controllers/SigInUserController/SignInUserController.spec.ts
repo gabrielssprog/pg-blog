@@ -1,4 +1,5 @@
 import { SignInUserController } from "./SignInUserController"
+import jwt from "jsonwebtoken"
 
 describe('Sign in user', () => {
     const user = {
@@ -27,6 +28,8 @@ describe('Sign in user', () => {
             google_token: 'asdf'
         }
     }
+    const token = 'adf'
+    jwt.sign = () => token
 
     it('should call "json" with user when user exists', async () => {
         const signInUserController = new SignInUserController(
@@ -42,7 +45,8 @@ describe('Sign in user', () => {
         )
 
         expect(response.json).toBeCalledWith({
-            user
+            user,
+            token
         })
     })
 
@@ -60,9 +64,10 @@ describe('Sign in user', () => {
             response,
             () => { }
         )
-
+        
         expect(response.json).toBeCalledWith({
-            user
+            user,
+            token
         })
     })
 
