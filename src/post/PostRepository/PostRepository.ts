@@ -30,4 +30,10 @@ export class PostRepository {
       where
     })
   }
+
+  public async deleteOne(where: Partial<Post> = {}): Promise<Post> {
+    return await this.connection.delete({
+      where
+    })
+  }
 }

@@ -51,6 +51,7 @@
             posts.forEach((post) => {
                 document.getElementById(`post-delete-button-${post.id}`).onclick = async (event) => {
                     await deletePostById(post.id)
+
                     const postCard = document.getElementById(`post-${post.id}`)
                     postCard.remove()
                 }

@@ -12,7 +12,8 @@ describe('Post Repository', () => {
         create: () => post,
         findFirst: () => post,
         findMany: () => [post],
-        update: () => post
+        update: () => post,
+        delete: () => post
     }
     const postRepository = new PostRepository(connection)
 
@@ -35,10 +36,17 @@ describe('Post Repository', () => {
         expect(postsFound).toStrictEqual([post])
     })
 
-    it('should updated post', async () => {
+    it('should return updated post', async () => {
         const postRepository = new PostRepository(connection)
         const postUpdated = await postRepository.updateOne(post)
 
         expect(postUpdated).toStrictEqual(post)
+    })
+
+    it('should return deleted post', async () => {
+        const postRepository = new PostRepository(connection)
+        const postDeleted = await postRepository.deleteOne(post)
+
+        expect(postDeleted).toStrictEqual(post)
     })
 })

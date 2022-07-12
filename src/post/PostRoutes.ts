@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Router } from "express";
 import { CreatePostController } from "./controllers/CreatePostController/CreatePostController";
 import { CreatePostViewController } from "./controllers/CreatePostViewController/CreatePostViewController";
+import { DeletePostByIdController } from "./controllers/DeletePostByIdContoller/DeletePostByIdController";
 import { FindPostByIdController } from "./controllers/FindPostByIdController/FindPostByIdController";
 import { ListPostsByAuthorController } from "./controllers/ListPostsByAuthorController/ListPostsByAuthorController";
 import { ListPostsController } from "./controllers/ListPostsController/ListPostsController";
@@ -11,6 +12,7 @@ import { UpdatePostByIdController } from "./controllers/UpdatePostByIdController
 import { UpdatePostViewController } from "./controllers/UpdatePostViewController/UpdatePostViewController";
 import { PostRepository } from "./PostRepository/PostRepository";
 import { CreatePostService } from "./services/CreatePostService/CreatePostService";
+import { DeletePostService } from "./services/DeletePostService/DeletePostService";
 import { FindPostService } from "./services/FindPostService/FindPostService";
 import { ListPostsService } from "./services/ListPostsService/ListPostsService";
 import { UpdatePostService } from "./services/UpdatePostService/UpdatePostService";
@@ -23,6 +25,7 @@ export class PostRoutes {
         const listPostsService = new ListPostsService(postRepository)
         const findPostService = new FindPostService(postRepository)
         const updatePostService = new UpdatePostService(postRepository)
+        const deletePostService = new DeletePostService(postRepository)
 
         const postsViewController = new PostsViewController()
         postRoutes.get('/pages/posts', postsViewController.handler)
@@ -61,6 +64,11 @@ export class PostRoutes {
             updatePostService
         )
         postRoutes.put('/posts/:postId', updatePostByIdController.handler.bind(updatePostByIdController))
+        const deletePostByIdController = new DeletePostByIdController(
+            findPostService,
+            deletePostService
+        )
+        postRoutes.delete('/posts/:postId', deletePostByIdController.handler.bind(deletePostByIdController))
 
         return postRoutes
     }

@@ -1,6 +1,6 @@
-import { UpdatePostByIdController } from "./UpdatePostByIdController"
+import { DeletePostByIdController } from "./DeletePostByIdController"
 
-describe('Update Post By Id Controller', () => {
+describe('delete Post By Id Controller', () => {
     const user = {
         id: '123',
     }
@@ -16,9 +16,6 @@ describe('Update Post By Id Controller', () => {
         },
         cookies: {
             user 
-        },
-        body: {
-            post
         }
     }
     const response: any = {
@@ -28,7 +25,7 @@ describe('Update Post By Id Controller', () => {
     const next = jest.fn()
 
     it('should call "json" with post', async () => {
-        const updatePostByIdController = new UpdatePostByIdController(
+        const deletePostByIdController = new DeletePostByIdController(
             {
                 execute: () => post
             } as any,
@@ -37,7 +34,7 @@ describe('Update Post By Id Controller', () => {
             } as any
         )
 
-        await updatePostByIdController.handler(
+        await deletePostByIdController.handler(
             request,
             response,
             next
@@ -49,7 +46,7 @@ describe('Update Post By Id Controller', () => {
     })
 
     it('should call "next" with error when post not exists', async () => {
-        const updatePostByIdController = new UpdatePostByIdController(
+        const deletePostByAuthorController = new DeletePostByIdController(
             {
                 execute: () => null
             } as any,
@@ -58,7 +55,7 @@ describe('Update Post By Id Controller', () => {
             } as any
         )
 
-        await updatePostByIdController.handler(
+        await deletePostByAuthorController.handler(
             request,
             response,
             next
@@ -68,7 +65,7 @@ describe('Update Post By Id Controller', () => {
     })
 
     it('should call "next" with error if user.id != authorId', async () => {
-        const updatePostByIdController = new UpdatePostByIdController(
+        const deletePostByAuthorController = new DeletePostByIdController(
             {
                 execute: () => ({ authorId: user.id + 1 })
             } as any,
@@ -77,7 +74,7 @@ describe('Update Post By Id Controller', () => {
             } as any
         )
 
-        await updatePostByIdController.handler(
+        await deletePostByAuthorController.handler(
             request,
             response,
             next
