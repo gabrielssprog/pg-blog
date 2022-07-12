@@ -7,6 +7,7 @@ export class AuthRoutes {
 
         const jwtAuthMiddleware = new JWTAuthMiddleware()
         authRoutes.post('/posts', jwtAuthMiddleware.handler)
+        authRoutes.put('/posts/:postId', jwtAuthMiddleware.handler)
 
         return authRoutes
     }

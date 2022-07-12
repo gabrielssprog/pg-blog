@@ -11,7 +11,8 @@ describe('Post Repository', () => {
     const connection: any = {
         create: () => post,
         findFirst: () => post,
-        findMany: () => [post]
+        findMany: () => [post],
+        update: () => post
     }
     const postRepository = new PostRepository(connection)
 
@@ -32,5 +33,12 @@ describe('Post Repository', () => {
         const postsFound = await postRepository.findAll(post)
 
         expect(postsFound).toStrictEqual([post])
+    })
+
+    it('should updated post', async () => {
+        const postRepository = new PostRepository(connection)
+        const postUpdated = await postRepository.updateOne(post)
+
+        expect(postUpdated).toStrictEqual(post)
     })
 })

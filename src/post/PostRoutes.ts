@@ -7,10 +7,13 @@ import { ListPostsByAuthorController } from "./controllers/ListPostsByAuthorCont
 import { ListPostsController } from "./controllers/ListPostsController/ListPostsController";
 import { PostsViewController } from "./controllers/PostsViewController/PostsViewController";
 import { PostViewController } from "./controllers/PostViewController/PostsViewController";
+import { UpdatePostByIdController } from "./controllers/UpdatePostByIdController/UpdatePostByIdController";
+import { UpdatePostViewController } from "./controllers/UpdatePostViewController/UpdatePostViewController";
 import { PostRepository } from "./PostRepository/PostRepository";
 import { CreatePostService } from "./services/CreatePostService/CreatePostService";
 import { FindPostService } from "./services/FindPostService/FindPostService";
 import { ListPostsService } from "./services/ListPostsService/ListPostsService";
+import { UpdatePostService } from "./services/UpdatePostService/UpdatePostService";
 
 export class PostRoutes {
     public static newPostRoutes(connection: PrismaClient) {
@@ -19,6 +22,7 @@ export class PostRoutes {
         const createPostService = new CreatePostService(postRepository)
         const listPostsService = new ListPostsService(postRepository)
         const findPostService = new FindPostService(postRepository)
+        const updatePostService = new UpdatePostService(postRepository)
 
         const postsViewController = new PostsViewController()
         postRoutes.get('/pages/posts', postsViewController.handler)
@@ -28,6 +32,9 @@ export class PostRoutes {
 
         const postViewController = new PostViewController()
         postRoutes.get('/pages/post/:postId', postViewController.handler)
+
+        const updatePostViewController = new UpdatePostViewController()
+        postRoutes.get('/pages/post/update/:postId', updatePostViewController.handler)
 
         const createPostController = new CreatePostController(
             createPostService
@@ -48,6 +55,12 @@ export class PostRoutes {
             findPostService
         )
         postRoutes.get('/posts/:postId', findPostByIdController.handler.bind(findPostByIdController))
+
+        const updatePostByIdController = new UpdatePostByIdController(
+            findPostService,
+            updatePostService
+        )
+        postRoutes.put('/posts/:postId', updatePostByIdController.handler.bind(updatePostByIdController))
 
         return postRoutes
     }
