@@ -12,7 +12,7 @@ export class App {
 
         app.use('/static', express.static(join(__dirname, '..', 'public')))
 
-        app.set('views', join(__dirname, 'views'))
+        app.set('views', join(__dirname, '..', 'views'))
         app.set('view engine', 'ejs')
 
         const router = Router.newRouter(connection, googleClient)
