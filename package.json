@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc",
+    "build": "tsc --esModuleInterop --resolveJsonModule",
     "start": "node dist/index.js",
     "dev": "ts-node-dev --transpile-only --exit-child --respawn src/index.ts"
   },
