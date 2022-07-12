@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "start": "tsc && node dist/index.js",
     "dev": "ts-node-dev --transpile-only --exit-child --respawn src/index.ts"
   },
   "keywords": [],
