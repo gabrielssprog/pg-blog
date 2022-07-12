@@ -30,9 +30,9 @@
         import { findPostsByAuthor, renderPostCards } from '/static/post/script.js'
         import { verifyAuth } from '/static/user/script.js'
 
-        verifyAuth()
-
         (async () => {
+            verifyAuth()
+
             const user = JSON.parse(localStorage.getItem('user'))
             const posts = await findPostsByAuthor(user.id)
             const postsContainer = document.getElementById('posts')
