@@ -7,7 +7,7 @@
 ## 🔎 Sobre
 Este é um projeto baseado no [medium](https://medium.com)
 
-## 🤔 Porquê?
+## 🤔 Por quê?
 Fiz este projeto para treinar minhas habilidades como programador web
 
 ## 🏃 Rodando o projeto
