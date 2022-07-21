@@ -26,7 +26,7 @@ export const renderPostCards = (element, posts, options = {}) => {
     <div id="post-${post.id}" class="card mb-3 mx-auto">
         <div class="card-body w-100">
             <h5 class="card-title"><a href="/pages/post/${post.id}">${post.title}</a></h5>
-            <p class="card-text">${parseContentPost(post.content)}${post.content.length > 220 && '...'}</p>
+            <p class="card-text">${parseContentPost(post.content)}${post.content.length > 220 ? '...' : ''}</p>
             ${(options.actions && options.actions.map((action) => action(post)).join('')) ?? ''}
         </div>
     </div>
