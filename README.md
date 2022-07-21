@@ -25,10 +25,5 @@ cd pg-blog
 
 ### 2. Subindo containers do Docker
 ```
-docker-compose up -d
-```
-
-### 3. Configurando banco de dados
-```
-docker-compose exec app npx prisma migrate deploy
+./deploy.sh
 ```
