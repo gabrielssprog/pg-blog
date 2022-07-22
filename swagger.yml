@@ -1,0 +1,223 @@
+openapi: '3.0.0'
+info:
+  title: PG Blog
+  version: '1.0' 
+components:
+  parameters:
+    auth:
+      in: header
+      name: authorization
+      schema:
+        type: string
+        example: Bearer <token>
+  schemas:
+    user_response:
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        google_id:
+          type: string
+        name:
+          type: string
+        picture:
+          type: string
+    post_body:
+      properties:
+        authorId:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+    post_response:
+      properties:
+        id:
+          type: integer
+        authorId:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+paths:
+  /signin:
+    post:
+      tags:
+        - auth
+      summary: Signin/Signup com a conta do google
+      requestBody:
+        description: Token id do google
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                google_token:
+                  type: string
+      responses:
+        201:
+          description: Informações do usuário criado/logado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_response'
+      
+  /auth/refresh:
+    get:
+      tags:
+        - auth
+      parameters:
+        - in: header
+          name: authorization
+          description: Token de autenticação antigo
+          required: true
+          schema:
+            type: string
+            example: Bearer <token>
+      responses:
+        200:
+          description: Novo token de autenticação
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+  
+  /posts:
+    get:
+      summary: Lista todos os posts
+      tags:
+        - post
+      responses:
+        200:
+          description: Lista de posts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  posts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/post_response'
+    post:
+      summary: Criar novo post
+      tags:
+        - post
+      parameters:
+        - $ref: '#/components/parameters/auth'
+      requestBody:
+         content:
+           application/json:
+            schema:
+              $ref: '#/components/schemas/post_body'
+      responses:
+        201:
+          description: Retorna o post criado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    $ref: '#/components/schemas/post_response'
+
+  /posts/author/{authorId}:
+    get:
+      summary: Listar todos os posts de um author (usuário)
+      tags:
+        - post
+      parameters:
+        - in: path
+          name: authorId
+          description: Id do author dos posts
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Retorna uma lista de posts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  posts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/post_response'
+      
+  /posts/{postId}:
+    get:
+      summary: Procurar por um post pelo id
+      tags:
+        - post
+      parameters:
+        - in: path
+          name: postId
+          description: Id do post
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Retorna um post
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    $ref: '#/components/schemas/post_response'
+    put:
+      summary: Atualizar post
+      tags:
+        - post
+      parameters:
+        - in: path
+          name: postId
+          description: Id do post
+          required: true
+          schema:
+            type: integer
+      requestBody:
+         content:
+           application/json:
+            schema:
+              $ref: '#/components/schemas/post_body'
+      responses:
+        200:
+          description: Retorna o post atualizado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    $ref: '#/components/schemas/post_response'
+    delete:
+      summary: Deletar post
+      tags:
+        - post
+      parameters:
+        - in: path
+          name: postId
+          description: Id do post
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Retorna o post deletado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    $ref: '#/components/schemas/post_response'
